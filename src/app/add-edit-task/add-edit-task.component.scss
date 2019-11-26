@@ -1,0 +1,51 @@
+.new-task-dialog {
+    max-height: 98% !important;
+
+    .e-dlg-content {
+        #new-task-form {
+            .field-container {
+                padding-bottom: 16px;
+            }
+
+            .allocation-container,
+            .contact-container {
+                display: flex;
+
+                .allocation,
+                .mobile {
+                    padding-right: 8px;
+                    flex: 1;
+                }
+            }
+
+            .contact-container .blood-group,
+            .allocation-container .dob {
+                padding-left: 8px;
+                flex: 1;
+            }
+
+            .allocation-container {
+                .allocation {
+                    display: flex;
+                    flex-direction: column;
+
+                    label:not(.e-btn) {
+                        font-weight: bold;
+                        color: #333;
+                        font-size: 12px;
+                        font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif, "-apple-system", "BlinkMacSystemFont";
+                    }
+
+                    .e-btn-group {                        
+                        height: 32px;
+                        margin-top: 8px;
+
+                        label {
+                            width: 50%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

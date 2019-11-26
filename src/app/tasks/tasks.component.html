@@ -1,0 +1,76 @@
+<div id='task-wrapper' class="planner-task-wrapper">
+    <header>
+        <div class="module-title">
+            <div class='title'>TASK LIST</div>
+            <div class='underline'></div>
+        </div>
+        <div class='add-task' (click)="onAddTask()">
+            <div class="e-icon-add e-icons"></div>
+            <div class="add-task-label">Add New</div>
+        </div>
+    </header>
+    <div class="tasks-detail-wrapper">
+        <div class="task-operations">
+            <div id='searchTemplate' class='search-wrapper planner-task-search'>
+                <div class="e-input-group" role="search">
+                    <input id="schedule_searchbar" class="e-input" name="input" type="search"
+                        placeholder="Search Task" (keyup)="taskSearch($event)" />
+                    <span id="schedule_searchbutton" class="e-input-group-icon search-icon e-icons" tabindex="-1"
+                        title="Search" aria-label="search"></span>
+                </div>
+            </div>
+            <button ejs-button cssClass="e-normal add-details" [isPrimary]="true" (click)='onAddTask()'>Add
+                New Task</button>
+        </div>
+        <div class="task-display">
+            <ejs-grid #gridObj [dataSource]='filteredTasks' [editSettings]='editSettings'
+                (actionComplete)='onDataEdit($event)'>
+                <e-columns>
+                    <e-column field='Id' width='50' headerText='ID' textAlign='Left'></e-column>
+                    <e-column field='Name' width='100' textAlign='Left'>
+                        <ng-template #template let-data>
+                            <span class="task-name" (click)='onTaskClick($event)'>{{data.Name}}</span>
+                        </ng-template>
+                    </e-column>
+                    <e-column field='Allocation' width='80' textAlign='Left'></e-column>
+                    <!-- <e-column field='BloodGroup' headerText='Blood Group' width='100' textAlign='Left'></e-column> -->
+                    <e-column field='Description' width='150' textAlign='Left' clipMode='EllipsisWithTooltip'></e-column>
+                    <!-- <e-column field='Mobile' headerText='Mobile Number' width='100' textAlign='Left'></e-column>
+                    <e-column field='Email' headerText='Email' width='120' textAlign='Left'></e-column> -->
+                </e-columns>
+                <ng-template #editSettingsTemplate let-data>
+                    <div class='grid-edit-dialog'>
+                        <div class='field-row'>
+                            <label> Task Id </label><span id='Id'>{{activeTaskData.Id}}</span>
+                        </div>
+                        <div class='field-row'>
+                            <label> Task Name </label><span id='Name'>{{activeTaskData.Name}}</span>
+                        </div>
+                        <div class='field-row'>
+                            <label> Allocation </label><span id='Allocation'>{{activeTaskData.Allocation}}</span>
+                        </div>
+                        <!-- <div class='field-row'>
+                            <label> DOB </label><span id='DOB'>{{activeTaskData.DOB}}</span>
+                        </div> -->
+                        <!-- <div class='field-row'>
+                            <label> Blood Group </label><span id='BloodGroup'>{{activeTaskData.BloodGroup}}</span>
+                        </div> -->
+                        <!-- <div class='field-row'>
+                            <label> Mobile Number </label><span id='Mobile'>{{activeTaskData.Mobile}}</span>
+                        </div> -->
+                        <!-- <div class='field-row'>
+                            <label> Email </label><span id='Email'>{{activeTaskData.Email}}</span>
+                        </div> -->
+                        <div class='field-row'>
+                            <label> Description </label><span id='Description'>{{activeTaskData.Description}}</span>
+                        </div>
+                        <div class='field-row history-row'>
+                            <label>Task History</label>
+                        </div>
+                    </div>
+                </ng-template>
+            </ejs-grid>
+        </div>
+    </div>
+</div>
+<app-add-edit-task #addEditTaskObj (refreshEvent)="gridRefresh()"></app-add-edit-task>

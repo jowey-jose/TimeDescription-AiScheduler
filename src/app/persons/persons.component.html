@@ -1,0 +1,51 @@
+<div class="persons-wrapper">
+    <header>
+      <div class="module-title">
+        <div class='title'>PERSONS LIST</div>
+        <div class='underline'></div>
+      </div>
+      <div class='add-person' (click)="onAddPerson()">
+        <div class="e-icon-add e-icons"></div>
+        <div class="add-person-label">Add New</div>
+      </div>
+    </header>
+    <div class="specialization-detail-wrapper">
+      <div class="specialization-types">
+        <ejs-dropdownlist id='Specialization' #specializationObj [dataSource]='specializationData'
+          [showClearButton]='true' (change)='onSpecializationChange($event)' [fields]='fields'
+          placeholder='Select a Specialization' popupHeight='230px'>
+        </ejs-dropdownlist>
+        <button ejs-button cssClass="e-normal" (click)='onAddPerson()' [isPrimary]="true">Add New Person</button>
+      </div>
+      <div #specialistItemObj class='specialist-display'>
+        <div (click)='onSpecialistClick($event)' *ngFor="let data of filteredPersons">
+          <div class='specialist-item' id=Specialist_{{data.Id}}>
+            <div class="specialist-image">
+              <img class="profile" src="./assets/images/{{data.Text}}.png" alt="person" />
+              <span class='availability {{data.Availability}}'></span>
+              <span class='upload icon-upload_photo {{data.NewPersonClass}}'></span>
+            </div>
+            <div class="specialist-detail">
+              <div class="name">
+                {{data.Name}}
+              </div>
+              <div class="education">
+                {{getEducation(data.Education)}}
+              </div>
+              <div class="specialist-experience">
+                <div class="specialization">
+                  <span class="label-text">Specialization</span>
+                  <span class="specialization-text">{{data.Designation}}</span>
+                </div>
+                <div class="experience">
+                  <span class="label-text">Experience</span>
+                  <span class="specialization-text">{{data.Experience}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-add-edit-person #addEditPersonObj (refreshPersons)="updatePersons()"></app-add-edit-person>
